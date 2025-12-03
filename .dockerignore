@@ -1,0 +1,14 @@
+node_modules
+npm-debug.log
+.git
+.gitignore
+.next
+.env.local
+.env.*.local
+*.pem
+.DS_Store
+README.md
+IMPLEMENTATION_COMPLETE.md
+QUICK_START.md
+.eslintrc.json
+references

@@ -211,6 +211,82 @@ Ready to deploy to:
 
 ---
 
+## 🐳 Docker Deployment
+
+### Build Docker Image
+
+```bash
+# Build the image with a tag
+docker build -t vicky-portfolio:latest .
+
+# Or with a specific version
+docker build -t vicky-portfolio:1.0.0 .
+```
+
+### Run Docker Container
+
+```bash
+# Run the container on port 3000
+docker run -p 3000:3000 vicky-portfolio:latest
+
+# Run in detached mode (background)
+docker run -d -p 3000:3000 --name portfolio vicky-portfolio:latest
+
+# View logs
+docker logs portfolio
+
+# Stop the container
+docker stop portfolio
+
+# Remove the container
+docker rm portfolio
+```
+
+### Docker Compose (Optional)
+
+Create a `docker-compose.yml` file:
+
+```yaml
+version: '3.8'
+
+services:
+  portfolio:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+```
+
+Then run:
+
+```bash
+# Start services
+docker-compose up -d
+
+# View logs
+docker-compose logs -f
+
+# Stop services
+docker-compose down
+```
+
+### Push to Docker Hub (Optional)
+
+```bash
+# Login to Docker Hub
+docker login
+
+# Tag image with your Docker Hub username
+docker tag vicky-portfolio:latest yourusername/vicky-portfolio:latest
+
+# Push to Docker Hub
+docker push yourusername/vicky-portfolio:latest
+```
+
+---
+
 ## 📝 Next Steps
 
 1. **Update Content** - Edit `/data/config.ts` with your information
