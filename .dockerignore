@@ -12,3 +12,8 @@ IMPLEMENTATION_COMPLETE.md
 QUICK_START.md
 .eslintrc.json
 references
+project
+vite.config.ts
+tsconfig.app.json
+tsconfig.node.json
+index.html

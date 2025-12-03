@@ -1,5 +1,5 @@
 import React from 'react';
-import { User, Award, Calendar, MapPin } from 'lucide-react';
+import { User, Award, Calendar } from 'lucide-react';
 
 const About = () => {
   return (
