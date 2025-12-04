@@ -43,10 +43,11 @@ export function Navbar() {
               <motion.a
                 key={link.name}
                 href={link.href}
-                whileHover={{ color: '#3b82f6' }}
-                className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                whileHover={{ y: -2 }}
+                className="relative text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors py-1 group"
               >
                 {link.name}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 group-hover:w-full transition-all duration-300" />
               </motion.a>
             ))}
           </div>

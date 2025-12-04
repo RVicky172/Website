@@ -1,7 +1,20 @@
 import type { Metadata } from 'next';
+import { Outfit, Inter } from 'next/font/google';
 import { Navbar } from '@/src/components/ui/Navbar';
 import { ThemeProvider } from '@/src/lib/ThemeContext';
 import './globals.css';
+
+const outfit = Outfit({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-outfit',
+});
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+});
 
 export const metadata: Metadata = {
   title: 'Vicky Kumar - Associate Staff Engineer',
@@ -31,7 +44,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth" suppressHydrationWarning>
+    <html lang="en" className={`scroll-smooth ${outfit.variable} ${inter.variable}`} suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
@@ -44,7 +57,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] overflow-x-hidden transition-colors duration-300">
+      <body className="bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] overflow-x-hidden transition-colors duration-300 font-inter">
         <ThemeProvider>
           <Navbar />
           <main className="relative">{children}</main>
@@ -53,3 +66,4 @@ export default function RootLayout({
     </html>
   );
 }
+
