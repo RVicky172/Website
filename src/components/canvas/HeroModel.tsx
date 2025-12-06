@@ -44,19 +44,19 @@ export function HeroModel({ scale = 1 }: HeroModelProps) {
         onPointerOver={() => setHovered(true)}
         onPointerOut={() => setHovered(false)}
       >
-        <icosahedronGeometry args={[1, 5]} />
+        <icosahedronGeometry args={[1, 2]} />
         <meshPhongMaterial
           color={hovered ? '#8b5cf6' : '#3b82f6'}
           emissive={hovered ? '#7c3aed' : '#1e40af'}
           wireframe={false}
           shininess={120}
-          flatShading={false}
+          flatShading={true}
         />
       </mesh>
 
       {/* Outer rotating ring */}
       <mesh rotation={[Math.PI / 4, 0, 0]}>
-        <torusGeometry args={[1.5, 0.1, 16, 100]} />
+        <torusGeometry args={[1.5, 0.1, 12, 48]} />
         <meshPhongMaterial
           color="#a855f7"
           emissive="#7c3aed"
@@ -68,7 +68,7 @@ export function HeroModel({ scale = 1 }: HeroModelProps) {
 
       {/* Secondary rotating ring */}
       <mesh rotation={[0, Math.PI / 3, 0]}>
-        <torusGeometry args={[1.8, 0.08, 16, 100]} />
+        <torusGeometry args={[1.8, 0.08, 12, 48]} />
         <meshPhongMaterial
           color="#3b82f6"
           emissive="#1e40af"

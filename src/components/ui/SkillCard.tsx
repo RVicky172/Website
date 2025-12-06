@@ -10,27 +10,25 @@ interface SkillCardProps {
   index?: number;
 }
 
+import { Spotlight } from './Spotlight';
+
 export function SkillCard({ skill, delay = 0 }: SkillCardProps) {
   const IconComponent = getTechIcon(skill);
-  const colorClass = skillColors[skill] || 'text-gray-400';
+  const colorClass = skillColors[skill] || 'text-zinc-400';
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
+      initial={{ opacity: 0, scale: 0.9 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
-      transition={{ delay, duration: 0.5 }}
-      whileHover={{ y: -4, boxShadow: '0 12px 40px rgba(59, 130, 246, 0.2)' }}
-      className="glass-light p-3 rounded-xl border border-opacity-30 hover:border-blue-400 dark:hover:border-blue-500 transition-all cursor-pointer flex flex-col items-center justify-center text-center min-h-20 gap-1.5 group"
+      transition={{ delay, duration: 0.4 }}
     >
-      <motion.div
-        whileHover={{ scale: 1.15, rotate: 8 }}
-        transition={{ type: 'spring', stiffness: 400, damping: 10 }}
-        className={`text-2xl ${colorClass} group-hover:drop-shadow-lg transition-all`}
-      >
-        <IconComponent />
-      </motion.div>
-      <span className="text-gray-700 dark:text-gray-200 font-semibold text-xs line-clamp-2">{skill}</span>
+      <Spotlight className="p-4 flex flex-col items-center justify-center gap-3 h-24 group cursor-default">
+        <div className={`text-3xl ${colorClass} grayscale group-hover:grayscale-0 transition-all duration-300`}>
+          <IconComponent />
+        </div>
+        <span className="text-zinc-500 group-hover:text-zinc-200 transition-colors font-medium text-xs tracking-wide">{skill}</span>
+      </Spotlight>
     </motion.div>
   );
 }

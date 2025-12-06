@@ -18,11 +18,11 @@ export function Button({
 
   const variants = {
     primary:
-      'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg hover:shadow-xl hover:shadow-blue-500/30 btn-glow',
+      'bg-zinc-100 text-zinc-900 hover:bg-white shadow-[0_0_20px_rgba(255,255,255,0.1)] border border-transparent',
     secondary:
-      'bg-gray-700 text-white hover:bg-gray-800 shadow-lg hover:shadow-xl',
+      'bg-zinc-800 text-zinc-100 hover:bg-zinc-700 border border-zinc-700',
     outline:
-      'border-2 border-blue-500 text-blue-600 dark:text-blue-400 hover:bg-blue-600 hover:text-white hover:border-transparent',
+      'border border-zinc-700 text-zinc-300 hover:border-zinc-500 hover:text-white bg-transparent',
   };
 
   const sizes = {

@@ -38,6 +38,8 @@ export const metadata: Metadata = {
   },
 };
 
+import SmoothScroll from '@/src/components/SmoothScroll';
+
 export default function RootLayout({
   children,
 }: {
@@ -57,11 +59,13 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] overflow-x-hidden transition-colors duration-300 font-inter">
-        <ThemeProvider>
-          <Navbar />
-          <main className="relative">{children}</main>
-        </ThemeProvider>
+      <body className="bg-[var(--bg-primary)] text-[var(--text-primary)] overflow-x-hidden transition-colors duration-300 font-inter">
+        <SmoothScroll>
+          <ThemeProvider>
+            <Navbar />
+            <main className="relative">{children}</main>
+          </ThemeProvider>
+        </SmoothScroll>
       </body>
     </html>
   );

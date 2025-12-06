@@ -24,7 +24,7 @@ export function Navbar() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className="fixed top-0 w-full z-50 glass dark:border-gray-700 border-b transition-colors duration-300 shadow-lg shadow-blue-500/5"
+      className="fixed top-0 w-full z-50 glass transition-colors duration-300 shadow-lg shadow-accent-glow/5"
     >
       <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16">
         <div className="flex justify-between items-center h-16">
@@ -44,7 +44,7 @@ export function Navbar() {
                 key={link.name}
                 href={link.href}
                 whileHover={{ y: -2 }}
-                className="relative text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors py-1 group"
+                className="relative text-text-secondary hover:text-accent transition-colors py-1 group"
               >
                 {link.name}
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 group-hover:w-full transition-all duration-300" />
@@ -72,7 +72,7 @@ export function Navbar() {
               onClick={toggleTheme}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
-              className="p-2 rounded-lg bg-gray-200 dark:bg-dark-800 text-gray-800 dark:text-yellow-400 hover:bg-gray-300 dark:hover:bg-dark-700 transition-colors"
+              className="p-2 rounded-lg bg-bg-secondary text-text-primary hover:bg-bg-tertiary transition-colors border border-border-subtle"
               aria-label="Toggle theme"
             >
               {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
@@ -81,7 +81,7 @@ export function Navbar() {
             {/* Mobile Menu Button */}
             <button
               onClick={toggleMenu}
-              className="md:hidden text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+              className="md:hidden text-text-primary hover:text-accent"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -95,13 +95,13 @@ export function Navbar() {
           transition={{ duration: 0.3 }}
           className="md:hidden overflow-hidden"
         >
-          <div className="py-4 space-y-2 border-t border-gray-200 dark:border-gray-800">
+          <div className="py-4 space-y-2 border-t border-border-subtle">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-dark-800 rounded-lg transition-colors"
+                className="block px-4 py-2 text-text-secondary hover:text-accent hover:bg-bg-secondary rounded-lg transition-colors"
               >
                 {link.name}
               </a>
