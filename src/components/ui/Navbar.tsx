@@ -32,7 +32,7 @@ export function Navbar() {
             href="#"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent"
+            className="text-2xl font-bold text-accent-primary hover:text-accent-primary transition-colors"
           >
             VK
           </motion.a>
@@ -47,7 +47,7 @@ export function Navbar() {
                 className="relative text-text-secondary hover:text-accent transition-colors py-1 group"
               >
                 {link.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 group-hover:w-full transition-all duration-300" />
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-primary group-hover:w-full transition-all duration-300" />
               </motion.a>
             ))}
           </div>
@@ -60,7 +60,7 @@ export function Navbar() {
               download="Vicky_Kumar_Resume.pdf"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-colors"
+              className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-lg bg-accent-primary hover:bg-accent-primary/90 text-white transition-colors"
               title="Download Resume"
             >
               <Download size={18} />
@@ -110,7 +110,7 @@ export function Navbar() {
               <a
                 href="/Vicky_Kumar_Resume.pdf"
                 download="Vicky_Kumar_Resume.pdf"
-                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white transition-colors w-full justify-center"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-accent-primary hover:bg-accent-primary/90 text-white transition-colors w-full justify-center"
               >
                 <Download size={18} />
                 <span className="font-semibold">Download Resume</span>

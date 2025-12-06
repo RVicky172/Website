@@ -22,15 +22,36 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const initialTheme = stored || (prefersDark ? 'dark' : 'light');
     
     setTheme(initialTheme);
-    document.documentElement.setAttribute('data-theme', initialTheme);
+    applyTheme(initialTheme);
     setMounted(true);
   }, []);
+
+  const applyTheme = (newTheme: Theme) => {
+    const htmlElement = document.documentElement;
+    
+    // Set data-theme attribute
+    if (newTheme === 'light') {
+      htmlElement.setAttribute('data-theme', 'light');
+      htmlElement.classList.add('light');
+      htmlElement.classList.remove('dark');
+    } else {
+      htmlElement.setAttribute('data-theme', 'dark');
+      htmlElement.classList.add('dark');
+      htmlElement.classList.remove('light');
+    }
+    
+    // Update meta theme-color
+    const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+    if (metaThemeColor) {
+      metaThemeColor.setAttribute('content', newTheme === 'dark' ? '#09090b' : '#ffffff');
+    }
+  };
 
   const toggleTheme = () => {
     setTheme((prev) => {
       const newTheme = prev === 'dark' ? 'light' : 'dark';
       localStorage.setItem('theme', newTheme);
-      document.documentElement.setAttribute('data-theme', newTheme);
+      applyTheme(newTheme);
       return newTheme;
     });
   };
@@ -50,7 +71,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 export function useTheme() {
   const context = useContext(ThemeContext);
   if (context === undefined) {
-    // Fallback for when used outside of ThemeProvider (e.g., during SSR of _not-found)
+    // Fallback for when used outside of ThemeProvider
     return { theme: 'dark' as Theme, toggleTheme: () => {} };
   }
   return context;

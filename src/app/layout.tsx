@@ -49,12 +49,23 @@ export default function RootLayout({
     <html lang="en" className={`scroll-smooth ${outfit.variable} ${inter.variable}`} suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#09090b" />
         <link rel="icon" href="/favicon.ico" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              const theme = localStorage.getItem('theme') || 'dark';
-              document.documentElement.setAttribute('data-theme', theme);
+              try {
+                const theme = localStorage.getItem('theme') || 'dark';
+                const html = document.documentElement;
+                html.setAttribute('data-theme', theme);
+                if (theme === 'light') {
+                  html.classList.add('light');
+                  html.classList.remove('dark');
+                } else {
+                  html.classList.add('dark');
+                  html.classList.remove('light');
+                }
+              } catch (e) {}
             `,
           }}
         />

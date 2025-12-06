@@ -81,12 +81,12 @@ export function FullScreenSection({
                         className="mb-16 text-center"
                     >
                         {title && (
-                            <h2 className="text-4xl md:text-6xl font-bold text-zinc-50 mb-6 tracking-tight">
+                            <h2 className="text-4xl md:text-6xl font-bold text-text-primary mb-6 tracking-tight">
                                 {title}
                             </h2>
                         )}
                         {subtitle && (
-                            <p className="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto text-balance">
+                            <p className="text-lg md:text-xl text-text-secondary max-w-2xl mx-auto text-balance">
                                 {subtitle}
                             </p>
                         )}

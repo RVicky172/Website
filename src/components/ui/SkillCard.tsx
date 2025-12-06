@@ -27,7 +27,7 @@ export function SkillCard({ skill, delay = 0 }: SkillCardProps) {
         <div className={`text-3xl ${colorClass} grayscale group-hover:grayscale-0 transition-all duration-300`}>
           <IconComponent />
         </div>
-        <span className="text-zinc-500 group-hover:text-zinc-200 transition-colors font-medium text-xs tracking-wide">{skill}</span>
+        <span className="text-text-secondary group-hover:text-accent transition-colors font-medium text-xs tracking-wide">{skill}</span>
       </Spotlight>
     </motion.div>
   );

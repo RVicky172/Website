@@ -30,6 +30,7 @@ module.exports = {
         primary: 'var(--bg-primary)',
         secondary: 'var(--bg-secondary)',
         tertiary: 'var(--bg-tertiary)',
+        'glass': 'rgba(9, 9, 11, 0.8)',
       },
       textColor: {
         primary: 'var(--text-primary)',
@@ -41,14 +42,23 @@ module.exports = {
       },
       animation: {
         'spotlight': 'spotlight 2s ease .75s 1 forwards',
+        'float': 'float 3s ease-in-out infinite',
       },
       keyframes: {
         spotlight: {
           '0%': { opacity: 0, transform: 'translate(-72%, -62%) scale(0.5)' },
           '100%': { opacity: 1, transform: 'translate(-50%,-40%) scale(1)' },
         },
+        float: {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-10px)' },
+        }
+      },
+      backdropBlur: {
+        xs: '2px',
       },
     },
   },
   plugins: [],
 };
+

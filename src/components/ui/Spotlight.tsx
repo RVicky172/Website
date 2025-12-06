@@ -35,7 +35,7 @@ export function Spotlight({ children, className = '' }: SpotlightProps) {
             onMouseMove={handleMouseMove}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            className={`relative overflow-hidden rounded-xl border border-zinc-800 bg-zinc-900/50 ${className}`}
+            className={`relative overflow-hidden rounded-xl border border-border-subtle bg-bg-secondary/50 ${className}`}
         >
             <div
                 className="pointer-events-none absolute -inset-px opacity-0 transition duration-300"
