@@ -2,6 +2,9 @@ import type { Metadata } from 'next';
 import { Outfit, Inter } from 'next/font/google';
 import { Navbar } from '@/src/components/ui/Navbar';
 import { ThemeProvider } from '@/src/lib/ThemeContext';
+import { ScrollProgress } from '@/src/components/ui/ScrollProgress';
+import { CursorFollower } from '@/src/components/ui/CursorFollower';
+import { ParticleField } from '@/src/components/ui/ParticleField';
 import './globals.css';
 
 const outfit = Outfit({
@@ -70,11 +73,18 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="bg-[var(--bg-primary)] text-[var(--text-primary)] overflow-x-hidden transition-colors duration-300 font-inter">
+      <body className="bg-[var(--bg-primary)] text-[var(--text-primary)] overflow-x-hidden transition-colors duration-300 font-inter bg-grid-pattern relative">
         <SmoothScroll>
           <ThemeProvider>
-            <Navbar />
-            <main className="relative">{children}</main>
+            <div className="fixed inset-0 z-0 pointer-events-none">
+              <ParticleField className="opacity-40" particleCount={50} />
+            </div>
+            <div className="relative z-10">
+              <ScrollProgress />
+              <CursorFollower />
+              <Navbar />
+              <main className="relative">{children}</main>
+            </div>
           </ThemeProvider>
         </SmoothScroll>
       </body>
