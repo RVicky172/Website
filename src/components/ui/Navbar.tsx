@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Moon, Sun, Download, Sparkles } from 'lucide-react';
 import { useTheme } from '@/src/lib/ThemeContext';
+import { UIIcons } from '@/src/lib/techIcons';
 
 const navLinks = [
   { name: 'Home', href: '#hero' },
@@ -52,8 +52,8 @@ export function Navbar() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
-            ? 'py-2'
-            : 'py-4'
+          ? 'py-2'
+          : 'py-4'
           }`}
       >
         <div className="max-w-7xl mx-auto px-4 md:px-8">
@@ -128,9 +128,9 @@ export function Navbar() {
                 className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-500 via-purple-500 to-blue-600 text-white font-semibold text-sm shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 transition-all border border-white/10"
                 title="Download Resume"
               >
-                <Download size={16} />
+                <UIIcons.Download size={16} />
                 <span>Resume</span>
-                <Sparkles size={14} className="opacity-70" />
+                <UIIcons.Sparkles size={14} className="opacity-70" />
               </motion.a>
 
               {/* Theme Toggle - Pill Style */}
@@ -148,7 +148,7 @@ export function Navbar() {
                   transition={{ duration: 0.3 }}
                   className="relative z-10"
                 >
-                  {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+                  {theme === 'dark' ? <UIIcons.Sun size={18} /> : <UIIcons.Moon size={18} />}
                 </motion.div>
               </motion.button>
 
@@ -168,7 +168,7 @@ export function Navbar() {
                       exit={{ rotate: 90, opacity: 0 }}
                       transition={{ duration: 0.2 }}
                     >
-                      <X size={20} />
+                      <UIIcons.X size={20} />
                     </motion.div>
                   ) : (
                     <motion.div
@@ -178,7 +178,7 @@ export function Navbar() {
                       exit={{ rotate: -90, opacity: 0 }}
                       transition={{ duration: 0.2 }}
                     >
-                      <Menu size={20} />
+                      <UIIcons.Menu size={20} />
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -245,7 +245,7 @@ export function Navbar() {
                 transition={{ duration: 0.3, delay: 0.3 }}
                 className="mt-8 flex items-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 text-white font-bold text-lg shadow-2xl shadow-purple-500/30"
               >
-                <Download size={20} />
+                <UIIcons.Download size={20} />
                 Download Resume
               </motion.a>
             </motion.div>

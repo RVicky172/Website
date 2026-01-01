@@ -68,7 +68,7 @@ export function FullScreenSection({
                 w-full min-h-screen
                 flex flex-col items-center justify-center
                 px-4 md:px-8 lg:px-16
-                py-24
+                py-12
                 relative overflow-hidden
                 ${className}
             `}
@@ -82,7 +82,7 @@ export function FullScreenSection({
                 {(title || subtitle) && (
                     <motion.div
                         variants={titleVariants}
-                        className="mb-16 text-center"
+                        className="mb-8 text-center"
                     >
                         {title && (
                             <div className="relative inline-block">

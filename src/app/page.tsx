@@ -1,18 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import {
-  Github,
-  Linkedin,
-  Twitter,
-  ExternalLink,
-  Code2,
-  Briefcase,
-  ArrowRight,
-  Mail,
-  Phone,
-  MapPin,
-} from 'lucide-react';
 import { Suspense } from 'react';
 import { Scene } from '@/src/components/canvas/Scene';
 import { HeroModel } from '@/src/components/canvas/HeroModel';
@@ -25,6 +13,7 @@ import { TiltCard } from '@/src/components/ui/TiltCard';
 import { TechEcosystem } from '@/src/components/ui/TechEcosystem';
 import { TestimonialCarousel } from '@/src/components/ui/TestimonialCarousel';
 import { resumeData } from '@/data/config';
+import { UIIcons } from '@/src/lib/techIcons';
 
 // Hero Section - Clean & Bold
 function HeroSection() {
@@ -44,7 +33,7 @@ function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
-          className="space-y-10"
+          className="space-y-6"
         >
           <div className="space-y-6">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-border-subtle hover:border-green-500/30 transition-colors mb-6 animate-fade-in">
@@ -74,12 +63,12 @@ function HeroSection() {
             </p>
           </div>
 
-          <div className="flex flex-wrap gap-4 pt-6">
+          <div className="flex flex-wrap gap-4 pt-4">
             <MagneticButton strength={0.2}>
               <Button
                 variant="primary"
                 size="lg"
-                icon={<ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />}
+                icon={<UIIcons.ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />}
                 onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
                 className="group"
               >
@@ -97,12 +86,12 @@ function HeroSection() {
             </MagneticButton>
           </div>
 
-          <div className="flex gap-6 pt-8 items-center">
+          <div className="flex gap-6 pt-4 items-center">
             <span className="h-px w-12 bg-border-subtle" />
             {[
-              { icon: Github, href: resumeData.social.github },
-              { icon: Linkedin, href: resumeData.social.linkedin },
-              { icon: Twitter, href: resumeData.social.twitter },
+              { icon: UIIcons.Github, href: resumeData.social.github },
+              { icon: UIIcons.Linkedin, href: resumeData.social.linkedin },
+              { icon: UIIcons.Twitter, href: resumeData.social.twitter },
             ].map(({ icon: Icon, href }) => (
               <a
                 key={href}
@@ -157,8 +146,8 @@ function AboutSection() {
   ];
 
   const highlights = [
-    { icon: Code2, title: 'Full Stack Developer', desc: 'Frontend & Backend Expertise', gradient: 'from-blue-500 to-cyan-500' },
-    { icon: Briefcase, title: 'Team Leadership', desc: 'Mentoring & Architecture', gradient: 'from-purple-500 to-pink-500' },
+    { icon: UIIcons.Code2, title: 'Full Stack Developer', desc: 'Frontend & Backend Expertise', gradient: 'from-blue-500 to-cyan-500' },
+    { icon: UIIcons.Briefcase, title: 'Team Leadership', desc: 'Mentoring & Architecture', gradient: 'from-purple-500 to-pink-500' },
   ];
 
   return (
@@ -397,7 +386,7 @@ function ProjectsSection() {
                     {/* Header */}
                     <div className="flex items-start justify-between mb-6">
                       <div className={`p-3 rounded-2xl bg-gradient-to-br ${gradients[index % gradients.length]} shadow-lg`}>
-                        <Code2 size={24} className="text-white" />
+                        <UIIcons.Code2 size={24} className="text-white" />
                       </div>
                       <a
                         href={project.link}
@@ -406,7 +395,7 @@ function ProjectsSection() {
                         className="flex items-center gap-2 px-4 py-2 rounded-xl bg-bg-primary/50 border border-border-subtle text-text-secondary hover:text-blue-400 hover:border-blue-500/30 transition-all text-sm font-medium"
                       >
                         <span>View Project</span>
-                        <ExternalLink size={14} />
+                        <UIIcons.ExternalLink size={14} />
                       </a>
                     </div>
 
@@ -510,15 +499,15 @@ function TestimonialsSection() {
 // Contact Section - Premium Redesign
 function ContactSection() {
   const contactMethods = [
-    { icon: Mail, label: 'Email', value: resumeData.social.email, href: `mailto:${resumeData.social.email}`, gradient: 'from-blue-500 to-cyan-500' },
-    { icon: Phone, label: 'Phone', value: resumeData.phone, href: `tel:${resumeData.phone}`, gradient: 'from-purple-500 to-pink-500' },
-    { icon: MapPin, label: 'Location', value: resumeData.location, href: null, gradient: 'from-emerald-500 to-cyan-500' },
+    { icon: UIIcons.Mail, label: 'Email', value: resumeData.social.email, href: `mailto:${resumeData.social.email}`, gradient: 'from-blue-500 to-cyan-500' },
+    { icon: UIIcons.Phone, label: 'Phone', value: resumeData.phone, href: `tel:${resumeData.phone}`, gradient: 'from-purple-500 to-pink-500' },
+    { icon: UIIcons.MapPin, label: 'Location', value: resumeData.location, href: null, gradient: 'from-emerald-500 to-cyan-500' },
   ];
 
   const socialLinks = [
-    { icon: Github, href: resumeData.social.github, label: 'GitHub' },
-    { icon: Linkedin, href: resumeData.social.linkedin, label: 'LinkedIn' },
-    { icon: Twitter, href: resumeData.social.twitter, label: 'Twitter' },
+    { icon: UIIcons.Github, href: resumeData.social.github, label: 'GitHub' },
+    { icon: UIIcons.Linkedin, href: resumeData.social.linkedin, label: 'LinkedIn' },
+    { icon: UIIcons.Twitter, href: resumeData.social.twitter, label: 'Twitter' },
   ];
 
   return (
@@ -562,7 +551,7 @@ function ContactSection() {
               <Button
                 variant="primary"
                 size="lg"
-                icon={<Mail size={18} />}
+                icon={<UIIcons.Mail size={18} />}
                 iconPosition="left"
                 onClick={() => window.location.href = `mailto:${resumeData.social.email}`}
               >
@@ -672,9 +661,9 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 space-y-4">
           <div className="flex justify-center gap-6 pb-6 border-b border-zinc-900/50">
             {[
-              { icon: Github, href: resumeData.social.github },
-              { icon: Linkedin, href: resumeData.social.linkedin },
-              { icon: Twitter, href: resumeData.social.twitter },
+              { icon: UIIcons.Github, href: resumeData.social.github },
+              { icon: UIIcons.Linkedin, href: resumeData.social.linkedin },
+              { icon: UIIcons.Twitter, href: resumeData.social.twitter },
             ].map(({ icon: Icon, href }) => (
               <a
                 key={href}

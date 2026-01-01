@@ -25,6 +25,30 @@ import {
   SiAmazon,
 } from 'react-icons/si';
 import { VscCode } from 'react-icons/vsc';
+import {
+  FaGithub,
+  FaLinkedin,
+  FaTwitter,
+  FaCode,
+  FaBriefcase,
+  FaQuoteLeft
+} from 'react-icons/fa';
+import {
+  HiMail,
+  HiPhone,
+  HiLocationMarker,
+  HiExternalLink,
+  HiArrowRight,
+  HiMenu,
+  HiX,
+  HiMoon,
+  HiSun,
+  HiDownload,
+  HiSparkles,
+  HiChevronLeft,
+  HiChevronRight,
+  HiStar
+} from 'react-icons/hi';
 import { IconType } from 'react-icons';
 
 export const techIconMap: Record<string, IconType> = {
@@ -138,4 +162,39 @@ export const skillColors: Record<string, string> = {
   OpenAI: 'text-green-500',
   'Cloud-Native Architecture': 'text-cyan-500',
   'Team Leadership': 'text-purple-500',
+};
+
+// UI Icons - replacing lucide-react
+export const UIIcons = {
+  // Social
+  Github: FaGithub,
+  Linkedin: FaLinkedin,
+  Twitter: FaTwitter,
+
+  // Contact
+  Mail: HiMail,
+  Phone: HiPhone,
+  MapPin: HiLocationMarker,
+
+  // Actions
+  ExternalLink: HiExternalLink,
+  ArrowRight: HiArrowRight,
+  Download: HiDownload,
+
+  // Navigation
+  Menu: HiMenu,
+  X: HiX,
+  ChevronLeft: HiChevronLeft,
+  ChevronRight: HiChevronRight,
+
+  // Theme
+  Moon: HiMoon,
+  Sun: HiSun,
+
+  // Misc
+  Code2: FaCode,
+  Briefcase: FaBriefcase,
+  Sparkles: HiSparkles,
+  Quote: FaQuoteLeft,
+  Star: HiStar,
 };

@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Quote, Star } from 'lucide-react';
+import { UIIcons } from '@/src/lib/techIcons';
 
 interface Testimonial {
     name: string;
@@ -95,7 +95,7 @@ export function TestimonialCarousel({
                         {/* Quote decoration */}
                         <div className="flex-shrink-0">
                             <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-500/10 to-purple-500/10 flex items-center justify-center border border-blue-500/20">
-                                <Quote size={32} className="text-blue-400 fill-blue-400/20" />
+                                <UIIcons.Quote size={32} className="text-blue-400 fill-blue-400/20" />
                             </div>
                         </div>
 
@@ -103,7 +103,7 @@ export function TestimonialCarousel({
                         <div className="text-center md:text-left space-y-6 flex-1">
                             <div className="flex justify-center md:justify-start gap-1 text-yellow-500 mb-2">
                                 {[...Array(5)].map((_, i) => (
-                                    <Star key={i} size={16} fill="currentColor" />
+                                    <UIIcons.Star key={i} size={16} fill="currentColor" />
                                 ))}
                             </div>
 
@@ -129,14 +129,14 @@ export function TestimonialCarousel({
                     className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 p-3 rounded-xl bg-bg-primary/50 border border-border-subtle hover:border-blue-500/30 text-text-secondary hover:text-blue-400 transition-all hover:scale-105 backdrop-blur-sm shadow-lg hover:shadow-blue-500/10 z-10"
                     aria-label="Previous testimonial"
                 >
-                    <ChevronLeft size={24} />
+                    <UIIcons.ChevronLeft size={24} />
                 </button>
                 <button
                     onClick={next}
                     className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 p-3 rounded-xl bg-bg-primary/50 border border-border-subtle hover:border-blue-500/30 text-text-secondary hover:text-blue-400 transition-all hover:scale-105 backdrop-blur-sm shadow-lg hover:shadow-blue-500/10 z-10"
                     aria-label="Next testimonial"
                 >
-                    <ChevronRight size={24} />
+                    <UIIcons.ChevronRight size={24} />
                 </button>
             </div>
 
