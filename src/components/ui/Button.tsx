@@ -22,11 +22,12 @@ export function Button({
   const baseStyles = `
     inline-flex items-center justify-center gap-2
     font-semibold rounded-xl
-    transition-all duration-300 ease-out
-    transform hover:scale-[1.02] active:scale-[0.98]
+    transition-all duration-200 ease-out
+    transform hover:scale-[1.02] active:scale-[0.95]
     focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500 focus-visible:ring-offset-zinc-950
     disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100
     whitespace-nowrap
+    select-none
   `;
 
   const variants = {

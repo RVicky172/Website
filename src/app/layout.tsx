@@ -5,6 +5,8 @@ import { ThemeProvider } from '@/src/lib/ThemeContext';
 import { ScrollProgress } from '@/src/components/ui/ScrollProgress';
 import { CursorFollower } from '@/src/components/ui/CursorFollower';
 import { ParticleField } from '@/src/components/ui/ParticleField';
+import { GlowOrbs } from '@/src/components/ui/GlowOrbs';
+import { BackToTop } from '@/src/components/ui/BackToTop';
 import './globals.css';
 
 const outfit = Outfit({
@@ -20,11 +22,11 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Vicky Kumar - Associate Staff Engineer',
+  title: 'Vicky Kumar | Associate Staff Engineer | Full-Stack Architect',
   description:
-    'Interactive portfolio showcasing 9+ years of experience building scalable web applications serving millions globally.',
+    'Vicky Kumar is a Staff Engineer specializing in cloud-native architectures, high-performance web systems, and AI-driven development. 9+ years experience delivering enterprise solutions globally.',
   keywords:
-    'developer, portfolio, react, nextjs, full stack, web development, typescript, cloud-native',
+    'Staff Engineer, Full-Stack Architect, React Specialist, Next.js Expert, Cloud-Native IDE, Vicky Kumar, Vicky Rohilla, AI Integration, Enterprise Web Architecture',
   authors: [{ name: 'Vicky Kumar' }],
   openGraph: {
     type: 'website',
@@ -52,8 +54,9 @@ export default function RootLayout({
     <html lang="en" className={`scroll-smooth ${outfit.variable} ${inter.variable}`} suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#09090b" />
-        <link rel="icon" href="/favicon.ico" />
+        <meta name="theme-color" content="#050505" />
+        <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.svg" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -74,8 +77,10 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-[var(--bg-primary)] text-[var(--text-primary)] overflow-x-hidden transition-colors duration-300 font-inter bg-grid-pattern relative">
+        <a href="#main-content" className="skip-to-content">Skip to main content</a>
         <SmoothScroll>
           <ThemeProvider>
+            <GlowOrbs />
             <div className="fixed inset-0 z-0 pointer-events-none">
               <ParticleField className="opacity-40" particleCount={50} />
             </div>
@@ -83,7 +88,8 @@ export default function RootLayout({
               <ScrollProgress />
               <CursorFollower />
               <Navbar />
-              <main className="relative">{children}</main>
+              <main id="main-content" className="relative">{children}</main>
+              <BackToTop />
             </div>
           </ThemeProvider>
         </SmoothScroll>

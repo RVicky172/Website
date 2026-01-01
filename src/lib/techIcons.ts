@@ -47,7 +47,9 @@ import {
   HiSparkles,
   HiChevronLeft,
   HiChevronRight,
-  HiStar
+  HiStar,
+  HiCalendar,
+  HiChatAlt2
 } from 'react-icons/hi';
 import { IconType } from 'react-icons';
 
@@ -197,4 +199,6 @@ export const UIIcons = {
   Sparkles: HiSparkles,
   Quote: FaQuoteLeft,
   Star: HiStar,
+  Calendar: HiCalendar,
+  MessageSquare: HiChatAlt2,
 };

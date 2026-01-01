@@ -11,6 +11,7 @@ const navLinks = [
   { name: 'Skills', href: '#skills' },
   { name: 'Experience', href: '#experience' },
   { name: 'Projects', href: '#projects' },
+  { name: 'Education', href: '#education' },
   { name: 'Contact', href: '#contact' },
 ];
 
@@ -62,8 +63,8 @@ export function Navbar() {
             px-6 py-3 rounded-2xl
             transition-all duration-500
             ${scrolled
-              ? 'bg-bg-primary/80 backdrop-blur-xl border border-border-subtle shadow-2xl shadow-black/20'
-              : 'bg-transparent'
+              ? 'bg-bg-primary/95 backdrop-blur-3xl border border-border-subtle/80 shadow-[0_8px_32px_0_rgba(0,0,0,0.37)] shadow-blue-500/10'
+              : 'bg-bg-primary/30 backdrop-blur-sm border border-border-subtle/50'
             }
           `}>
             {/* Logo */}
@@ -78,7 +79,7 @@ export function Navbar() {
                   <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 via-purple-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-purple-500/25 group-hover:shadow-purple-500/40 transition-shadow">
                     <span className="text-white font-bold text-lg">V</span>
                   </div>
-                  <div className="absolute -inset-1 rounded-xl bg-gradient-to-br from-blue-500 via-purple-500 to-cyan-500 opacity-0 group-hover:opacity-30 blur transition-opacity" />
+                  <div className="absolute -inset-1 rounded-xl bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 opacity-0 group-hover:opacity-50 blur-sm transition-opacity animate-gradient bg-[length:200%_auto]" />
                 </div>
                 <div className="hidden sm:block">
                   <p className="text-sm font-bold text-text-primary">Vicky Kumar</p>
@@ -107,8 +108,15 @@ export function Navbar() {
                     {activeSection === link.href.replace('#', '') && (
                       <motion.div
                         layoutId="activeNav"
-                        className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-full"
+                        className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-cyan-500 rounded-full shadow-lg shadow-purple-500/30"
                         transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                      />
+                    )}
+                    {activeSection !== link.href.replace('#', '') && (
+                      <motion.div
+                        className="absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 w-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"
+                        whileHover={{ width: '70%' }}
+                        transition={{ duration: 0.3 }}
                       />
                     )}
                     <span className="relative z-10">{link.name}</span>
@@ -125,12 +133,13 @@ export function Navbar() {
                 download="Vicky_Kumar_Resume.pdf"
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-500 via-purple-500 to-blue-600 text-white font-semibold text-sm shadow-lg shadow-purple-500/25 hover:shadow-purple-500/40 transition-all border border-white/10"
+                className="group/btn hidden md:flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-500 via-purple-500 to-blue-600 text-white font-semibold text-sm shadow-lg shadow-purple-500/25 hover:shadow-purple-500/50 hover:shadow-xl transition-all border border-white/10 relative overflow-hidden"
                 title="Download Resume"
               >
-                <UIIcons.Download size={16} />
-                <span>Resume</span>
-                <UIIcons.Sparkles size={14} className="opacity-70" />
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-400 via-purple-400 to-cyan-400 opacity-0 group-hover/btn:opacity-20 transition-opacity" />
+                <UIIcons.Download size={16} className="relative z-10" />
+                <span className="relative z-10">Resume</span>
+                <UIIcons.Sparkles size={14} className="opacity-70 relative z-10 group-hover/btn:animate-pulse" />
               </motion.a>
 
               {/* Theme Toggle - Pill Style */}
