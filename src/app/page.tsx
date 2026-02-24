@@ -11,11 +11,13 @@ import { AnimatedCounter } from '@/src/components/ui/AnimatedCounter';
 import { MagneticButton } from '@/src/components/ui/MagneticButton';
 import { resumeData } from '@/data/config';
 import { UIIcons, getTechIcon } from '@/src/lib/techIcons';
-import { SiReact, SiNodedotjs, SiDocker, SiGit } from 'react-icons/si';
+import { SiReact, SiNodedotjs, SiDocker, SiKubernetes, SiTypescript, SiNextdotjs } from 'react-icons/si';
 import { HiAcademicCap } from 'react-icons/hi';
 
-// Hero Section - Immersive & High-Impact
+// ------- Hero Section -------
 function HeroSection() {
+  const tickerItems = resumeData.tagline.split('  •  ');
+
   return (
     <FullScreenSection id="hero" className="relative pt-32 md:pt-40">
       <div className="max-w-5xl mx-auto relative z-10 text-center">
@@ -54,6 +56,16 @@ function HeroSection() {
               <br />
               Building enterprise-scale distributed systems and user experiences.
             </p>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+              className="text-sm text-text-secondary/60 flex items-center justify-center gap-2"
+            >
+              <UIIcons.MapPin size={14} className="text-blue-500/70" />
+              {resumeData.location}
+            </motion.p>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-6 pt-6">
@@ -64,7 +76,7 @@ function HeroSection() {
                 className="rounded-full px-12 h-16 text-xl font-bold shadow-2xl shadow-blue-500/20 hover:shadow-blue-500/40"
                 onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                Launch Project
+                View My Work
               </Button>
             </MagneticButton>
             <MagneticButton strength={0.15}>
@@ -74,12 +86,12 @@ function HeroSection() {
                 className="rounded-full px-12 h-16 text-xl font-bold border-white/10 hover:bg-white/5"
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                Let's Talk
+                Let&apos;s Talk
               </Button>
             </MagneticButton>
           </div>
 
-          <div className="flex justify-center gap-8 pt-12">
+          <div className="flex justify-center gap-8 pt-4">
             {[
               { icon: UIIcons.Github, href: resumeData.social.github, label: "GitHub" },
               { icon: UIIcons.Linkedin, href: resumeData.social.linkedin, label: "LinkedIn" },
@@ -98,6 +110,23 @@ function HeroSection() {
               </motion.a>
             ))}
           </div>
+
+          {/* Achievement Marquee Ticker */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8 }}
+            className="relative overflow-hidden rounded-full glass-morphic border border-white/5 py-3 px-6 max-w-2xl mx-auto"
+          >
+            <div className="flex gap-12 animate-marquee-left" style={{ width: 'max-content' }}>
+              {[...tickerItems, ...tickerItems, ...tickerItems].map((item, idx) => (
+                <span key={idx} className="whitespace-nowrap text-xs font-bold uppercase tracking-[0.2em] text-text-secondary flex items-center gap-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500 inline-block flex-shrink-0" />
+                  {item}
+                </span>
+              ))}
+            </div>
+          </motion.div>
         </motion.div>
       </div>
 
@@ -117,94 +146,118 @@ function HeroSection() {
   );
 }
 
-// About Section - Modern Redesign
-// About Section - Bento Grid Redesign
+// ------- About Section -------
 function AboutSection() {
   const stats = [
-    { value: 9, suffix: '+', label: 'Years Experience', icon: UIIcons.Briefcase, color: 'text-blue-400' },
-    { value: 100, suffix: 'M+', label: 'Global Users', icon: UIIcons.Sparkles, color: 'text-purple-400' },
-    { value: 50, suffix: '+', label: 'Systems Built', icon: UIIcons.Code2, color: 'text-cyan-400' },
+    { value: 9, suffix: '+', label: 'Years Experience', icon: UIIcons.Briefcase, topColor: 'from-blue-500 to-blue-600', iconBg: 'bg-blue-500/15', color: 'text-blue-400', glow: 'shadow-blue-500/20' },
+    { value: 100, suffix: 'M+', label: 'Global Users', icon: UIIcons.Sparkles, topColor: 'from-purple-500 to-violet-600', iconBg: 'bg-purple-500/15', color: 'text-purple-400', glow: 'shadow-purple-500/20' },
+    { value: 20, suffix: '+', label: 'Projects Delivered', icon: UIIcons.Code2, topColor: 'from-cyan-500 to-sky-600', iconBg: 'bg-cyan-500/15', color: 'text-cyan-400', glow: 'shadow-cyan-500/20' },
+    { value: 70, suffix: '+', label: 'Countries Served', icon: UIIcons.MapPin, topColor: 'from-emerald-500 to-green-600', iconBg: 'bg-emerald-500/15', color: 'text-emerald-400', glow: 'shadow-emerald-500/20' },
+  ];
+
+  const dynamicTags = [
+    ...resumeData.skills.frontend.slice(0, 4),
+    ...resumeData.skills.infrastructure.slice(0, 4),
   ];
 
   return (
     <FullScreenSection id="about" title="The Architect">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:auto-rows-[280px]">
-          {/* Bio Card - Large Bento Item */}
+
+          {/* Bio Card */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="md:col-span-8 md:row-span-2 glass-morphic rounded-[2.5rem] p-10 flex flex-col justify-between relative overflow-hidden group border border-white/5 hover:border-white/10 transition-all bg-grid-pattern bg-[length:20px_20px]"
+            className="md:col-span-8 md:row-span-2 relative overflow-hidden group rounded-[2.5rem] border border-white/8 hover:border-white/15 transition-all duration-500"
+            style={{ background: 'linear-gradient(145deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%)' }}
           >
-            <div className="relative z-10 space-y-8">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-xs font-bold tracking-widest uppercase">
-                Biography
+            {/* Top accent line */}
+            <div className="absolute top-0 left-10 right-10 h-[1px] bg-gradient-to-r from-transparent via-blue-500/60 to-transparent" />
+            {/* Grid pattern */}
+            <div className="absolute inset-0 bg-grid-pattern bg-[length:24px_24px] opacity-[0.03]" />
+            {/* Blue glow orb */}
+            <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-blue-600/8 rounded-full blur-[120px] group-hover:bg-blue-600/15 transition-all duration-700" />
+
+            <div className="relative z-10 p-10 h-full flex flex-col justify-between space-y-8">
+              <div className="space-y-6">
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-blue-500/20 bg-blue-500/8 text-blue-400 text-[11px] font-black tracking-[0.2em] uppercase">
+                  <div className="w-1.5 h-1.5 rounded-full bg-blue-400" />
+                  Biography
+                </div>
+                <h3 className="text-3xl md:text-5xl lg:text-6xl font-black text-text-primary leading-[1.05] tracking-tight">
+                  Engineering <br />
+                  <span className="text-blue-500">Digital Mastery.</span>
+                </h3>
+                <p className="text-base md:text-lg text-text-secondary leading-relaxed max-w-2xl">
+                  {resumeData.summary}
+                </p>
               </div>
-              <h3 className="text-3xl md:text-5xl lg:text-6xl font-black text-text-primary leading-tight tracking-tighter">
-                Engineering <br />
-                <span className="text-blue-500">Digital Mastery.</span>
-              </h3>
-              <p className="text-lg md:text-xl text-text-secondary leading-relaxed max-w-2xl font-light">
-                {resumeData.summary}
-              </p>
-              <div className="flex items-center gap-4 text-white font-bold group-hover:gap-6 transition-all cursor-pointer">
-                <span>Core expertise in scalability</span>
-                <UIIcons.ArrowRight size={20} className="text-blue-500" />
+              <div className="flex items-center gap-3 text-white font-semibold group-hover:gap-5 transition-all cursor-pointer text-sm">
+                <span className="text-text-secondary group-hover:text-white transition-colors">Core expertise in scalability</span>
+                <div className="w-7 h-7 rounded-full bg-blue-500/20 flex items-center justify-center group-hover:bg-blue-500/40 transition-colors">
+                  <UIIcons.ArrowRight size={14} className="text-blue-400" />
+                </div>
               </div>
             </div>
-            {/* Background Accent */}
-            <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-blue-600/10 rounded-full blur-[100px] group-hover:bg-blue-600/20 transition-all duration-700" />
           </motion.div>
 
-          {/* Stats Grid for Bento */}
-          <div className="md:col-span-4 md:row-span-2 grid grid-cols-1 gap-6">
+          {/* Stats Grid */}
+          <div className="md:col-span-4 md:row-span-2 grid grid-cols-1 gap-4">
             {stats.map((stat, idx) => (
               <motion.div
                 key={stat.label}
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ delay: idx * 0.1 }}
-                className="glass-morphic rounded-[2rem] p-8 flex items-center gap-6 group hover:border-white/10 transition-all"
+                className="relative overflow-hidden rounded-[1.75rem] border border-white/8 hover:border-white/15 transition-all duration-300 group flex items-center gap-5 px-7 py-5"
+                style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.015) 100%)' }}
               >
-                <div className={`flex-shrink-0 w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center ${stat.color} group-hover:scale-110 transition-transform shadow-xl`}>
-                  <stat.icon size={28} />
+                {/* Coloured top edge */}
+                <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${stat.topColor} opacity-70 group-hover:opacity-100 transition-opacity`} />
+                {/* Icon */}
+                <div className={`flex-shrink-0 w-14 h-14 rounded-2xl ${stat.iconBg} flex items-center justify-center ${stat.color} group-hover:scale-110 transition-transform shadow-lg ${stat.glow}`}>
+                  <stat.icon size={24} />
                 </div>
                 <div>
-                  <div className="text-3xl md:text-4xl font-black text-text-primary">
+                  <div className={`text-3xl font-black ${stat.color}`}>
                     <AnimatedCounter target={stat.value} suffix={stat.suffix} />
                   </div>
-                  <p className="text-sm text-text-secondary font-medium tracking-wide italic">{stat.label}</p>
+                  <p className="text-xs text-text-secondary font-semibold tracking-wider uppercase mt-0.5">{stat.label}</p>
                 </div>
+                {/* Subtle corner glow */}
+                <div className={`absolute -bottom-6 -right-6 w-24 h-24 ${stat.iconBg} rounded-full blur-[40px] opacity-0 group-hover:opacity-100 transition-opacity`} />
               </motion.div>
             ))}
           </div>
 
-          {/* Location & Interactive Status */}
+          {/* Location Bar */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="md:col-span-12 glass-morphic rounded-[2.5rem] p-10 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden group border border-white/5"
+            className="md:col-span-12 relative overflow-hidden rounded-[2rem] border border-white/8 hover:border-white/15 transition-all duration-300 group"
+            style={{ background: 'linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%)' }}
           >
-            <div className="flex items-center gap-6 z-10">
-              <div className="w-20 h-20 rounded-3xl bg-blue-500/10 flex items-center justify-center text-blue-400 shadow-inner">
-                <UIIcons.MapPin size={36} />
+            <div className="absolute top-0 left-16 right-16 h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+            <div className="p-8 flex flex-col md:flex-row items-center justify-between gap-6 z-10 relative">
+              <div className="flex items-center gap-5">
+                <div className="w-14 h-14 rounded-2xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-400">
+                  <UIIcons.MapPin size={24} />
+                </div>
+                <div>
+                  <h4 className="text-lg font-black text-text-primary tracking-tight">Currently operating from</h4>
+                  <p className="text-sm text-text-secondary font-medium">{resumeData.location} • Open to Remote</p>
+                </div>
               </div>
-              <div>
-                <h4 className="text-xl md:text-2xl font-black text-text-primary tracking-tight">Currently operating from</h4>
-                <p className="text-lg text-text-secondary font-light">{resumeData.location}</p>
+              <div className="flex flex-wrap gap-2">
+                {dynamicTags.map(tag => (
+                  <span key={tag} className="px-4 py-1.5 rounded-full text-xs font-semibold border border-white/8 text-text-secondary hover:text-white hover:border-white/20 hover:bg-white/5 transition-all" style={{ background: 'rgba(255,255,255,0.02)' }}>
+                    {tag}
+                  </span>
+                ))}
               </div>
             </div>
-
-            <div className="flex flex-wrap gap-3 z-10">
-              {['Next.js', 'TypeScript', 'Kubernetes', 'Cloud Native'].map(tag => (
-                <span key={tag} className="px-5 py-2 rounded-full glass border border-white/5 text-sm font-medium text-text-secondary hover:text-white hover:border-white/20 transition-all">
-                  {tag}
-                </span>
-              ))}
-            </div>
-
-            <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
           </motion.div>
         </div>
       </div>
@@ -213,20 +266,19 @@ function AboutSection() {
 }
 
 
-// Skills Section - Premium Redesign
-// Skills Section - Bento-Style Grid
+// ------- Skills Section -------
 function SkillsSection() {
   const skillCategories = [
-    { title: 'Frontend', skills: resumeData.skills.frontend, gradient: 'from-blue-500 to-cyan-500', IconComponent: SiReact, delay: 0 },
-    { title: 'Backend', skills: resumeData.skills.backend, gradient: 'from-purple-500 to-pink-500', IconComponent: SiNodedotjs, delay: 0.1 },
-    { title: 'Cloud & Infrastructure', skills: resumeData.skills.infrastructure, gradient: 'from-emerald-500 to-teal-400', IconComponent: SiDocker, delay: 0.2 },
-    { title: 'Core & AI', skills: resumeData.skills.other, gradient: 'from-orange-500 to-red-500', IconComponent: SiGit, delay: 0.3 },
+    { title: 'Frontend', skills: resumeData.skills.frontend, gradient: 'from-blue-500 to-cyan-400', headerBg: 'from-blue-900/60 to-cyan-900/30', borderColor: 'border-blue-500/20', accentColor: 'blue-400', IconComponent: SiReact, delay: 0 },
+    { title: 'Backend', skills: resumeData.skills.backend, gradient: 'from-purple-500 to-pink-500', headerBg: 'from-purple-900/60 to-pink-900/30', borderColor: 'border-purple-500/20', accentColor: 'purple-400', IconComponent: SiNodedotjs, delay: 0.1 },
+    { title: 'Cloud & Infrastructure', skills: resumeData.skills.infrastructure, gradient: 'from-emerald-500 to-teal-400', headerBg: 'from-emerald-900/60 to-teal-900/30', borderColor: 'border-emerald-500/20', accentColor: 'emerald-400', IconComponent: SiDocker, delay: 0.2 },
+    { title: 'Core & AI', skills: resumeData.skills.other, gradient: 'from-orange-500 to-red-500', headerBg: 'from-orange-900/60 to-red-900/30', borderColor: 'border-orange-500/20', accentColor: 'orange-400', IconComponent: SiKubernetes, delay: 0.3 },
   ];
 
   return (
-    <FullScreenSection id="skills" title="Arsenal">
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <FullScreenSection id="skills" title="Tech Stack">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           {skillCategories.map((category) => (
             <motion.div
               key={category.title}
@@ -234,187 +286,138 @@ function SkillsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: category.delay }}
               viewport={{ once: true }}
-              className="group relative p-8 rounded-[2rem] glass-morphic border border-white/5 hover:border-white/10 transition-all overflow-hidden flex flex-col h-full"
+              className={`group relative rounded-[1.75rem] border ${category.borderColor} hover:border-white/20 transition-all duration-500 overflow-hidden flex flex-col`}
+              style={{ background: 'linear-gradient(160deg, rgba(255,255,255,0.04) 0%, rgba(10,10,10,0.8) 100%)' }}
             >
-              <div className={`absolute -top-20 -right-20 w-48 h-48 bg-gradient-to-br ${category.gradient} rounded-full blur-[80px] opacity-0 group-hover:opacity-20 transition-all duration-700`} />
-
-              <div className="relative z-10 flex flex-col h-full">
-                <div className={`w-16 h-16 rounded-3xl bg-gradient-to-br ${category.gradient} flex items-center justify-center shadow-2xl mb-8 group-hover:scale-110 transition-transform`}>
-                  <category.IconComponent size={32} className="text-white" />
+              {/* Coloured header panel */}
+              <div className={`relative p-6 bg-gradient-to-br ${category.headerBg} border-b border-white/5`}>
+                <div className={`absolute inset-0 bg-gradient-to-br ${category.headerBg} opacity-60`} />
+                <div className={`absolute -top-8 -right-8 w-32 h-32 bg-gradient-to-br ${category.gradient} rounded-full blur-[60px] opacity-30 group-hover:opacity-50 transition-opacity duration-700`} />
+                <div className="relative z-10 flex items-center gap-4">
+                  <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${category.gradient} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform`}>
+                    <category.IconComponent size={24} className="text-white" />
+                  </div>
+                  <h3 className="text-xl font-black text-white tracking-tight">{category.title}</h3>
                 </div>
+              </div>
 
-                <h3 className="text-2xl font-black text-white mb-6 tracking-tight">
-                  {category.title}
-                </h3>
-
-                <div className="flex flex-wrap gap-2.5 mt-auto">
-                  {category.skills.map((skill) => {
-                    const SkillIcon = getTechIcon(skill);
-                    return (
-                      <motion.span
-                        key={skill}
-                        whileHover={{ scale: 1.1, y: -2 }}
-                        className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold bg-white/5 border border-white/5 text-text-secondary hover:text-white hover:border-white/20 transition-all cursor-default"
-                      >
-                        <SkillIcon size={14} className="group-hover:text-blue-400 transition-colors" />
-                        <span>{skill}</span>
-                      </motion.span>
-                    );
-                  })}
-                </div>
+              {/* Skills chips */}
+              <div className="p-6 flex flex-wrap gap-2 flex-grow">
+                {category.skills.map((skill) => {
+                  const SkillIcon = getTechIcon(skill);
+                  return (
+                    <motion.span
+                      key={skill}
+                      whileHover={{ scale: 1.08, y: -1 }}
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[11px] font-bold border border-white/8 text-text-secondary hover:text-white hover:border-white/20 hover:bg-white/5 transition-all cursor-default"
+                      style={{ background: 'rgba(255,255,255,0.025)' }}
+                    >
+                      <SkillIcon size={12} />
+                      <span>{skill}</span>
+                    </motion.span>
+                  );
+                })}
               </div>
             </motion.div>
           ))}
         </div>
+
+        {/* Also Familiar With Row */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          viewport={{ once: true }}
+          className="relative rounded-[1.5rem] border border-white/8 p-5 overflow-hidden"
+          style={{ background: 'rgba(255,255,255,0.02)' }}
+        >
+          <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
+            <span className="text-[10px] font-black uppercase tracking-[0.3em] text-text-secondary/50 whitespace-nowrap flex-shrink-0 pl-1">
+              Also familiar with
+            </span>
+            <div className="w-px h-4 bg-white/10 hidden md:block" />
+            <div className="flex flex-wrap gap-2">
+              {resumeData.skills.testing.map((skill) => {
+                const SkillIcon = getTechIcon(skill);
+                return (
+                  <span
+                    key={skill}
+                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-[11px] font-semibold border border-white/6 text-text-secondary/50 hover:text-text-secondary hover:border-white/12 transition-all cursor-default"
+                    style={{ background: 'rgba(255,255,255,0.018)' }}
+                  >
+                    <SkillIcon size={11} />
+                    {skill}
+                  </span>
+                );
+              })}
+            </div>
+          </div>
+        </motion.div>
       </div>
     </FullScreenSection>
   );
 }
 
-// Experience Section - Enhanced Timeline
-// Experience Section - Cyber Timeline
+// ------- Experience Section -------
+const experienceAccents = [
+  { topGrad: 'from-blue-500 to-purple-500', badge: 'bg-blue-500 shadow-blue-500/40', companyBg: 'bg-blue-500/8 border-blue-500/20 text-blue-300', cardBorder: 'border-blue-500/15', dot: 'bg-blue-500' },
+  { topGrad: 'from-purple-500 to-pink-500', badge: 'bg-purple-500 shadow-purple-500/40', companyBg: 'bg-purple-500/8 border-purple-500/20 text-purple-300', cardBorder: 'border-purple-500/15', dot: 'bg-purple-500' },
+  { topGrad: 'from-emerald-500 to-teal-500', badge: 'bg-emerald-500 shadow-emerald-500/40', companyBg: 'bg-emerald-500/8 border-emerald-500/20 text-emerald-300', cardBorder: 'border-emerald-500/15', dot: 'bg-emerald-500' },
+];
+
 function ExperienceSection() {
   return (
     <FullScreenSection id="experience" title="The Journey">
       <div className="max-w-4xl mx-auto px-4">
-        <div className="relative border-l-2 border-dashed border-white/10 space-y-16 pl-8 md:pl-16">
-          {resumeData.experience.map((job, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="relative group"
-            >
-              {/* Animated Glow on Timeline */}
-              <div className="absolute -left-[33px] md:-left-[65px] top-0 w-4 h-4 rounded-full bg-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.5)] group-hover:scale-150 transition-transform" />
-
-              <div className="space-y-4">
-                <div className="flex flex-col md:flex-row md:items-baseline justify-between gap-2">
-                  <h3 className="text-2xl md:text-3xl font-black text-white tracking-tight">
-                    {job.role}
-                  </h3>
-                  <span className="text-blue-400 font-bold text-sm tracking-widest uppercase">
-                    {job.duration}
-                  </span>
-                </div>
-                <p className="text-xl font-bold bg-white/10 w-fit px-4 py-1 rounded-lg text-text-secondary border border-white/5">
-                  {job.company}
-                </p>
-                <p className="text-lg text-text-secondary leading-relaxed font-light">
-                  {job.description}
-                </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-4">
-                  {job.highlights.map((highlight, i) => (
-                    <div key={i} className="flex gap-3 text-text-secondary text-sm group/item">
-                      <div className="mt-1.5 w-1 h-1 rounded-full bg-blue-500/50 flex-shrink-0" />
-                      <span className="group-hover/item:text-white transition-colors">{highlight}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </FullScreenSection>
-  );
-}
-
-// Projects Section - Dynamic 12-Column Bento Grid
-function ProjectsSection() {
-  const gradients = [
-    'from-blue-600/20 to-cyan-500/10',
-    'from-purple-600/20 to-pink-500/10',
-    'from-emerald-600/20 to-teal-500/10',
-    'from-orange-600/20 to-red-500/10',
-  ];
-
-  const colSpans = [
-    'lg:col-span-8 md:col-span-12', // Wide
-    'lg:col-span-4 md:col-span-12', // Narrow
-    'lg:col-span-5 md:col-span-12', // Medium
-    'lg:col-span-7 md:col-span-12', // Wide
-  ];
-
-  return (
-    <FullScreenSection id="projects" title="Featured Work">
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
-          {resumeData.projects.map((project, index) => {
-            const isWide = colSpans[index % colSpans.length].includes('col-span-8') || colSpans[index % colSpans.length].includes('col-span-7');
-
+        <div className="space-y-6">
+          {resumeData.experience.map((job, index) => {
+            const accent = experienceAccents[index % experienceAccents.length];
             return (
               <motion.div
-                key={project.title}
-                initial={{ opacity: 0, y: 40 }}
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.1 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className={`group relative ${colSpans[index % colSpans.length]} glass-morphic rounded-[2.5rem] border border-white/5 hover:border-white/10 transition-all overflow-hidden flex flex-col ${isWide ? 'lg:flex-row' : 'flex-col'}`}
+                className={`group relative rounded-[2rem] border ${accent.cardBorder} hover:border-white/15 transition-all duration-500 overflow-hidden`}
+                style={{ background: 'linear-gradient(150deg, rgba(255,255,255,0.04) 0%, rgba(10,10,10,0.7) 100%)' }}
               >
-                {/* Animated Background Aura */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${gradients[index % gradients.length]} opacity-0 group-hover:opacity-100 transition-opacity duration-1000`} />
+                {/* Coloured top line */}
+                <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${accent.topGrad}`} />
+                {/* Subtle corner glow */}
+                <div className={`absolute -top-12 -left-12 w-48 h-48 rounded-full bg-gradient-to-br ${accent.topGrad} blur-[80px] opacity-5 group-hover:opacity-12 transition-opacity duration-700`} />
 
-                {/* Mockup/Image Placeholder with Parallax */}
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  className={`relative ${isWide ? 'lg:w-1/2 w-full' : 'w-full'} aspect-video lg:aspect-auto p-6 md:p-8 flex items-center justify-center`}
-                >
-                  <div className="absolute inset-4 rounded-[2rem] overflow-hidden glass border border-white/10 shadow-2xl relative">
-                    <motion.div
-                      initial={{ y: 0 }}
-                      whileHover={{ y: -20 }}
-                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                      className={`absolute inset-0 bg-gradient-to-br ${gradients[index % gradients.length]} opacity-20`}
-                    />
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <motion.div whileHover={{ rotate: 10, scale: 1.2 }} className="text-white/20">
-                        <UIIcons.Code2 size={120} />
-                      </motion.div>
+                <div className="p-8 md:p-10 space-y-5">
+                  {/* Header row */}
+                  <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+                    <div className="flex items-start gap-4">
+                      {/* Numbered badge */}
+                      <div className={`mt-1 w-9 h-9 rounded-xl ${accent.badge} shadow-lg flex items-center justify-center text-white text-xs font-black flex-shrink-0 group-hover:scale-110 transition-transform`}>
+                        {String(index + 1).padStart(2, '0')}
+                      </div>
+                      <div>
+                        <h3 className="text-xl md:text-2xl font-black text-white tracking-tight">{job.role}</h3>
+                        <span className={`inline-flex items-center mt-2 px-4 py-1 rounded-lg text-sm font-bold border ${accent.companyBg}`}>{job.company}</span>
+                      </div>
                     </div>
-                    {/* Status Badge */}
-                    <div className="absolute top-4 right-4 px-3 py-1 rounded-full glass border border-white/20 text-[10px] font-black uppercase tracking-widest text-white/70">
-                      Production Ready
-                    </div>
-                  </div>
-                </motion.div>
-
-                {/* Content */}
-                <div className={`relative z-10 ${isWide ? 'lg:w-1/2 w-full' : 'w-full'} p-8 md:p-10 flex flex-col justify-center space-y-6`}>
-                  <div className="space-y-2">
-                    <div className="flex items-start justify-between gap-4">
-                      <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-text-primary tracking-tighter leading-tight break-words">
-                        {project.title}
-                      </h3>
-                      <a href={project.link} target="_blank" className="flex-shrink-0 p-3 rounded-full glass border border-border-subtle hover:bg-blue-500 hover:text-white transition-all">
-                        <UIIcons.ExternalLink size={20} />
-                      </a>
-                    </div>
+                    <span className="text-xs font-bold text-text-secondary/70 tracking-widest uppercase whitespace-nowrap pt-1">
+                      {job.duration}
+                    </span>
                   </div>
 
-                  <p className="text-sm md:text-base text-text-secondary leading-relaxed font-light line-clamp-3 group-hover:line-clamp-none transition-all duration-500 break-words">
-                    {project.description}
+                  {/* Description */}
+                  <p className="text-sm md:text-base text-text-secondary leading-relaxed ml-13">
+                    {job.description}
                   </p>
 
-                  <div className="flex flex-wrap gap-2">
-                    {project.technologies.slice(0, 4).map(tech => (
-                      <span key={tech} className="px-3 py-1 rounded-lg bg-bg-secondary border border-border-subtle text-[10px] font-bold text-text-secondary group-hover:text-text-primary transition-colors">
-                        {tech}
-                      </span>
+                  {/* Highlights grid */}
+                  <div className={`grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 ml-13 border-t border-white/5`}>
+                    {job.highlights.map((highlight, i) => (
+                      <div key={i} className="flex items-start gap-2.5 text-text-secondary text-sm">
+                        <div className={`mt-[7px] w-1.5 h-1.5 rounded-full ${accent.dot} flex-shrink-0 opacity-70`} />
+                        <span className="group-hover:text-white/80 transition-colors leading-snug">{highlight}</span>
+                      </div>
                     ))}
-                  </div>
-
-                  <div className="pt-6 border-t border-white/5">
-                    <div className="flex flex-col gap-3">
-                      {project.highlights.slice(0, 1).map((h, i) => (
-                        <div key={i} className="text-[12px] text-text-secondary flex gap-2 font-medium">
-                          <span className="text-blue-500">▹</span>
-                          {h}
-                        </div>
-                      ))}
-                    </div>
                   </div>
                 </div>
               </motion.div>
@@ -426,14 +429,143 @@ function ProjectsSection() {
   );
 }
 
-// Education & Testimonials - Integrated Bento Architecture
-function EducationAndRecognitionSection() {
+// ------- Projects Section -------
+const projectThemes = [
+  { grad: 'from-blue-600 to-cyan-500', borderColor: 'border-blue-500/20', bgAura: 'from-blue-500/12 to-cyan-500/5', chipBg: 'bg-blue-500/10 border-blue-500/20 text-blue-300', dot: 'text-blue-400' },
+  { grad: 'from-purple-600 to-pink-500', borderColor: 'border-purple-500/20', bgAura: 'from-purple-500/12 to-pink-500/5', chipBg: 'bg-purple-500/10 border-purple-500/20 text-purple-300', dot: 'text-purple-400' },
+  { grad: 'from-emerald-600 to-teal-500', borderColor: 'border-emerald-500/20', bgAura: 'from-emerald-500/12 to-teal-500/5', chipBg: 'bg-emerald-500/10 border-emerald-500/20 text-emerald-300', dot: 'text-emerald-400' },
+  { grad: 'from-orange-600 to-red-500', borderColor: 'border-orange-500/20', bgAura: 'from-orange-500/12 to-red-500/5', chipBg: 'bg-orange-500/10 border-orange-500/20 text-orange-300', dot: 'text-orange-400' },
+];
+
+function ProjectsSection() {
+  const colSpans = [
+    'lg:col-span-8 md:col-span-12',
+    'lg:col-span-4 md:col-span-12',
+    'lg:col-span-5 md:col-span-12',
+    'lg:col-span-7 md:col-span-12',
+  ];
+
+  const projectIcons = [
+    [SiReact, SiTypescript],
+    [SiNextdotjs, SiTypescript],
+    [SiReact, SiNodedotjs],
+    [SiReact, SiNodedotjs],
+  ];
+
   return (
-    <FullScreenSection id="education" title="Recognition & Foundation">
+    <FullScreenSection id="projects" title="Featured Work">
+      <div className="max-w-7xl mx-auto px-4 md:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+          {resumeData.projects.map((project, index) => {
+            const isWide = colSpans[index % colSpans.length].includes('col-span-8') || colSpans[index % colSpans.length].includes('col-span-7');
+            const theme = projectThemes[index % projectThemes.length];
+            const [IconA, IconB] = projectIcons[index % projectIcons.length];
+
+            return (
+              <motion.div
+                key={project.title}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: index * 0.08 }}
+                viewport={{ once: true }}
+                className={`group relative ${colSpans[index % colSpans.length]} rounded-[2rem] border ${theme.borderColor} hover:border-white/20 transition-all duration-500 overflow-hidden flex flex-col ${isWide ? 'lg:flex-row' : 'flex-col'}`}
+                style={{ background: 'linear-gradient(150deg, rgba(255,255,255,0.04) 0%, rgba(8,8,12,0.95) 100%)' }}
+              >
+                {/* Top colour line */}
+                <div className={`absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r ${theme.grad} z-20`} />
+                {/* Background hover aura */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${theme.bgAura} opacity-0 group-hover:opacity-100 transition-opacity duration-700`} />
+
+                {/* Visual Preview Panel */}
+                <div className={`relative flex-shrink-0 ${isWide ? 'lg:w-2/5' : 'w-full'} ${isWide ? 'min-h-[250px]' : 'h-44'} p-5 flex items-center justify-center overflow-hidden`}>
+                  {/* Gradient mesh background */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${theme.bgAura} opacity-60`} />
+                  <div className="absolute inset-0 bg-grid-pattern bg-[length:20px_20px] opacity-[0.04]" />
+
+                  {/* Floating tech icons */}
+                  <div className="relative flex items-center justify-center gap-4">
+                    <motion.div
+                      animate={{ y: [0, -8, 0] }}
+                      transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+                      className={`text-gradient-to-br ${theme.grad}`}
+                      style={{ filter: 'drop-shadow(0 0 20px currentColor)' }}
+                    >
+                      <IconA size={72} className="opacity-70" />
+                    </motion.div>
+                    <motion.div
+                      animate={{ y: [0, 8, 0] }}
+                      transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+                      className="opacity-30"
+                    >
+                      <IconB size={52} />
+                    </motion.div>
+                  </div>
+
+                  {/* Status badge */}
+                  <div className="absolute top-3 right-3 flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-white/10 text-[9px] font-black uppercase tracking-wider text-white/50" style={{ background: 'rgba(255,255,255,0.05)' }}>
+                    <div className="w-1 h-1 rounded-full bg-green-400 animate-pulse" />
+                    Live
+                  </div>
+                </div>
+
+                {/* Content Panel */}
+                <div className={`relative z-10 flex-1 p-7 md:p-9 flex flex-col justify-between gap-5`}>
+                  <div className="space-y-3">
+                    <div className="flex items-start justify-between gap-3">
+                      <h3 className="text-xl sm:text-2xl md:text-3xl font-black text-white tracking-tight leading-tight">
+                        {project.title}
+                      </h3>
+                      <a
+                        href={project.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`flex-shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-[11px] font-bold border transition-all hover:brightness-125 ${theme.chipBg}`}
+                      >
+                        <UIIcons.ExternalLink size={11} />
+                        View
+                      </a>
+                    </div>
+                    <p className="text-sm text-text-secondary leading-relaxed">
+                      {project.description}
+                    </p>
+                  </div>
+
+                  {/* Tech chips */}
+                  <div className="flex flex-wrap gap-1.5">
+                    {project.technologies.slice(0, 5).map(tech => (
+                      <span key={tech} className={`px-2.5 py-1 rounded-lg text-[10px] font-bold border transition-colors ${theme.chipBg}`}>
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Highlights */}
+                  <div className="space-y-2 pt-3 border-t border-white/5">
+                    {project.highlights.slice(0, isWide ? 4 : 2).map((h, i) => (
+                      <div key={i} className={`text-[11px] flex items-start gap-2 ${theme.dot}`}>
+                        <span className="font-bold mt-0.5 flex-shrink-0">▹</span>
+                        <span className="text-text-secondary group-hover:text-white/80 transition-colors">{h}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </FullScreenSection>
+  );
+}
+
+// ------- Education & Achievements Section -------
+function EducationAndAchievementsSection() {
+  return (
+    <FullScreenSection id="education" title="Education & Achievements">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8">
 
-          {/* Main Education Card - Spans 8 columns */}
+          {/* Main Education Card */}
           {resumeData.education.map((edu, index) => (
             <motion.div
               key={index}
@@ -471,7 +603,7 @@ function EducationAndRecognitionSection() {
             </motion.div>
           ))}
 
-          {/* Testimonial Highlight Card - Spans 4 columns */}
+          {/* Testimonial Highlight Card */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -485,7 +617,7 @@ function EducationAndRecognitionSection() {
                 Impact
               </div>
               <p className="text-lg md:text-xl text-white italic font-light leading-relaxed">
-                "{resumeData.testimonials[0].text.substring(0, 120)}..."
+                &ldquo;{resumeData.testimonials[0].text.substring(0, 120)}...&rdquo;
               </p>
             </div>
             <div className="relative z-10 pt-6">
@@ -494,7 +626,7 @@ function EducationAndRecognitionSection() {
             </div>
           </motion.div>
 
-          {/* Remaining Testimonials as smaller cards */}
+          {/* Remaining Testimonials */}
           {resumeData.testimonials.slice(1).map((testimonial, idx) => (
             <motion.div
               key={idx}
@@ -508,7 +640,7 @@ function EducationAndRecognitionSection() {
                   {[1, 2, 3, 4, 5].map(i => <UIIcons.Star key={i} size={12} />)}
                 </div>
                 <p className="text-sm text-text-secondary italic leading-relaxed">
-                  "{testimonial.text}"
+                  &ldquo;{testimonial.text}&rdquo;
                 </p>
                 <div className="pt-2">
                   <p className="text-sm font-black text-white">{testimonial.name}</p>
@@ -517,6 +649,34 @@ function EducationAndRecognitionSection() {
               </div>
             </motion.div>
           ))}
+
+          {/* Key Achievements Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="md:col-span-8 glass-morphic rounded-[2.5rem] p-10 border border-white/5 relative overflow-hidden group hover:border-white/10 transition-all"
+          >
+            <div className="absolute -top-16 -right-16 w-64 h-64 bg-purple-500/5 rounded-full blur-[80px] group-hover:bg-purple-500/10 transition-all duration-700" />
+            <div className="relative z-10 space-y-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-black uppercase tracking-widest">
+                Key Achievements
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {resumeData.achievements.map((ach, i) => (
+                  <div key={i} className="space-y-2 p-4 rounded-2xl bg-white/3 border border-white/5 hover:border-white/10 transition-all">
+                    <div className="flex items-center gap-2">
+                      <div className="w-6 h-6 rounded-full bg-emerald-500/20 flex items-center justify-center flex-shrink-0">
+                        <UIIcons.Sparkles size={12} className="text-emerald-400" />
+                      </div>
+                      <p className="text-sm font-black text-white leading-snug">{ach.label}</p>
+                    </div>
+                    <p className="text-xs text-text-secondary leading-relaxed">{ach.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
 
           {/* Call to Action Small Card */}
           <motion.div
@@ -538,7 +698,7 @@ function EducationAndRecognitionSection() {
   );
 }
 
-// Contact Section - Interactive Grid Hub Redesign
+// ------- Contact Section -------
 function ContactSection() {
   return (
     <FullScreenSection id="contact" title="Collaboration">
@@ -556,11 +716,11 @@ function ContactSection() {
               Ready to <span className="gradient-text animate-gradient">Innovate?</span>
             </h3>
             <p className="text-lg md:text-xl text-text-secondary font-light max-w-2xl relative z-10">
-              Whether you have a breakthrough idea or a complex engineering challenge, I'm ready to help you build the future with cutting-edge technology.
+              Whether you have a breakthrough idea or a complex engineering challenge, I&apos;m ready to help you build the future with cutting-edge technology.
             </p>
           </motion.div>
 
-          {/* Contact Direct Hub - spans 8 */}
+          {/* Contact Direct Hub */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -572,9 +732,9 @@ function ContactSection() {
               <div className="space-y-4">
                 <p className="text-xs font-black text-blue-500 uppercase tracking-[0.3em]">Direct Line</p>
                 <h4 className="text-4xl font-black text-white tracking-tighter">Start a Conversation</h4>
-                <p className="text-text-secondary leading-relaxed">Reach out directly for partnership inquiries or technical collaborations. I typically respond within 24 hours.</p>
+                <p className="text-text-secondary leading-relaxed">Reach out directly for partnership inquiries or technical collaborations.</p>
               </div>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap items-center gap-4">
                 <MagneticButton strength={0.2}>
                   <Button
                     variant="primary"
@@ -585,19 +745,23 @@ function ContactSection() {
                     Send Message
                   </Button>
                 </MagneticButton>
-                <div className="flex -space-x-3 items-center ml-4">
-                  {[1, 2, 3, 4].map(i => (
-                    <div key={i} className="w-10 h-10 rounded-full border-2 border-bg-primary bg-bg-secondary flex items-center justify-center overflow-hidden">
-                      <div className="w-full h-full bg-gradient-to-br from-blue-500/20 to-purple-500/20" />
-                    </div>
-                  ))}
-                  <div className="pl-6 text-xs text-text-secondary font-bold uppercase tracking-widest">+50 Projects Delivered</div>
+                <div className="flex items-center gap-2 px-4 py-2 rounded-full glass border border-white/5 text-xs font-bold text-text-secondary">
+                  <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                  Typical response: &lt; 24 hours
                 </div>
+              </div>
+              <div className="flex -space-x-3 items-center">
+                {[1, 2, 3, 4].map(i => (
+                  <div key={i} className="w-10 h-10 rounded-full border-2 border-bg-primary bg-bg-secondary flex items-center justify-center overflow-hidden">
+                    <div className="w-full h-full bg-gradient-to-br from-blue-500/20 to-purple-500/20" />
+                  </div>
+                ))}
+                <div className="pl-6 text-xs text-text-secondary font-bold uppercase tracking-widest">+20 Projects Delivered</div>
               </div>
             </div>
           </motion.div>
 
-          {/* Social Cluster - span 4 */}
+          {/* Social Cluster */}
           <div className="md:col-span-4 grid grid-cols-2 gap-6">
             {[
               { icon: UIIcons.Github, href: resumeData.social.github, color: 'hover:text-white', bg: 'hover:bg-white/5' },
@@ -621,7 +785,7 @@ function ContactSection() {
             ))}
           </div>
 
-          {/* Info Card - span 12 */}
+          {/* Info Card */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -641,6 +805,10 @@ function ContactSection() {
               <div className="text-center md:text-left">
                 <p className="text-[10px] font-black uppercase tracking-widest text-text-secondary">Email</p>
                 <p className="text-white font-bold text-sm">{resumeData.social.email}</p>
+              </div>
+              <div className="text-center md:text-left">
+                <p className="text-[10px] font-black uppercase tracking-widest text-text-secondary">Phone</p>
+                <p className="text-white font-bold text-sm">{resumeData.phone}</p>
               </div>
               <div className="text-center md:text-left">
                 <p className="text-[10px] font-black uppercase tracking-widest text-text-secondary">Timezone</p>
@@ -664,7 +832,7 @@ export default function Home() {
       <SkillsSection />
       <ExperienceSection />
       <ProjectsSection />
-      <EducationAndRecognitionSection />
+      <EducationAndAchievementsSection />
       <ContactSection />
 
       <footer className="relative py-20 overflow-hidden border-t border-white/5">
@@ -734,10 +902,15 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
-            <p className="text-xs text-text-secondary font-medium tracking-widest uppercase">
-              © 2025 Vicky Kumar • Built with <span className="text-blue-500">React</span> & <span className="text-purple-500">Next.js</span>
-            </p>
+          <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div className="flex flex-col md:flex-row items-center gap-2 md:gap-6">
+              <p className="text-xs text-text-secondary font-medium tracking-widest uppercase">
+                © 2026 Vicky Kumar • Built with <span className="text-blue-500">React</span> & <span className="text-purple-500">Next.js</span>
+              </p>
+              <p className="text-xs text-text-secondary/50 font-medium">
+                Made with <span className="text-red-400">❤️</span> in India
+              </p>
+            </div>
             <div className="flex gap-8">
               <a href="#" className="text-[10px] font-black uppercase tracking-[0.2em] text-text-secondary hover:text-white transition-colors">Privacy Policy</a>
               <a href="#" className="text-[10px] font-black uppercase tracking-[0.2em] text-text-secondary hover:text-white transition-colors">Terms of Service</a>

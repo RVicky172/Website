@@ -1,12 +1,13 @@
 export const resumeData = {
   name: "Vicky Kumar",
   title: "Associate Staff Engineer",
+  tagline: "9+ Years  •  100M+ Users  •  70+ Countries  •  99.9% Uptime",
   email: "rohillavicky.172@gmail.com",
   phone: "+91-9650962411",
   location: "Noida, India",
   bio: "Full-Stack Engineer with 9+ years of experience transforming complex challenges into elegant, scalable solutions. Specialized in architecting cloud-native applications, leading high-impact teams, and pioneering AI-powered developer tools that serve millions globally.",
 
-  summary: "Elite Associate Staff Engineer at Nagarro, driving innovation at the intersection of enterprise architecture and cutting-edge technology. Expert in building production-grade applications that scale to millions of users while maintaining exceptional performance. Proven track record of modernizing legacy systems, pioneering LLM integrations, and delivering mission-critical solutions for government and enterprise sectors.",
+  summary: "Associate Staff Engineer at Nagarro, driving innovation at the intersection of enterprise architecture and cutting-edge technology. Expert in building production-grade applications that scale to millions of users while maintaining exceptional performance — from modernizing legacy systems, to pioneering LLM integrations, to delivering mission-critical solutions for government and enterprise sectors across three continents.",
 
   skills: {
     frontend: ["React 18+", "TypeScript 5+", "Next.js", "Redux Toolkit", "JavaScript (ES2023)", "HTML5/CSS3", "Tailwind CSS", "Framer Motion"],
@@ -21,7 +22,7 @@ export const resumeData = {
       role: "Associate Staff Engineer",
       company: "Nagarro Software Pvt Ltd",
       duration: "November 2022 – Present",
-      description: "Single-handedly architected and deployed a cutting-edge cloud-native IDE that revolutionized developer workflows. Transformed a monolithic desktop application into a sophisticated browser-based development platform serving 100+ engineers daily.",
+      description: "Single-handedly architected and deployed a cloud-native IDE that revolutionized developer workflows. Transformed a monolithic desktop application into a sophisticated browser-based development platform serving 100+ engineers daily.",
       highlights: [
         "Architect of cloud-native IDE used by 100+ developers daily, increasing productivity by 40%",
         "First-to-market LLM integration reducing code generation time by 60%",
@@ -58,7 +59,7 @@ export const resumeData = {
   projects: [
     {
       title: "Cloud-Native Integration Studio",
-      description: "Spearheaded transformation of legacy desktop IDE into cutting-edge cloud platform. Single-handedly architected complete solution from infrastructure to UI, integrating LLM capabilities for AI-assisted development. 100+ developers use daily.",
+      description: "Spearheaded transformation of a legacy desktop IDE into a cloud-native development platform. Architected the complete solution from infrastructure to UI — integrating LLM capabilities for AI-assisted development. 100+ developers use it daily with zero downtime.",
       technologies: ["React 18", "TypeScript", "VS Code API", "Theia IDE", "Docker", "Kubernetes", "Node.js", "OpenAI"],
       highlights: [
         "Production platform serving 100+ developers with 99.9% uptime",
@@ -70,7 +71,7 @@ export const resumeData = {
     },
     {
       title: "National Citizen Portal",
-      description: "Architected high-performance government web application serving 2M+ daily users with 95+ Lighthouse scores. Implemented advanced optimization techniques including code splitting, lazy loading, and PWA capabilities for exceptional user experience.",
+      description: "Architected a high-performance government web application serving 2M+ daily users with 95+ Lighthouse scores. Implemented advanced optimization including code splitting, lazy loading, and PWA capabilities for exceptional user experience.",
       technologies: ["React 18", "TypeScript", "Redux Toolkit", "Node.js", "Webpack 5", "Service Workers"],
       highlights: [
         "Serves 2M+ citizens daily with 99.99% uptime",
@@ -82,7 +83,7 @@ export const resumeData = {
     },
     {
       title: "DHIS2 Global Health Platform",
-      description: "Key contributor to WHO-endorsed health information system deployed in 70+ countries serving 2.3B people. Built responsive dashboards processing millions of health records with real-time analytics and data visualization.",
+      description: "Key contributor to the WHO-endorsed health information system deployed in 70+ countries, serving 2.3B people. Built responsive dashboards processing millions of health records with real-time analytics and data visualization.",
       technologies: ["React", "JavaScript", "D3.js", "Chart.js", "Responsive Design", "Web Workers"],
       highlights: [
         "Deployed across 70+ countries impacting 2.3B people worldwide",
@@ -90,11 +91,11 @@ export const resumeData = {
         "Mobile-first responsive design for field health workers",
         "Optimized data-intensive operations with Web Workers for smooth performance"
       ],
-      link: "https://github.com",
+      link: "https://github.com/dhis2",
     },
     {
       title: "Doctor Diary Healthcare App",
-      description: "Healthcare application empowering 5,000+ medical professionals with real-time patient data management. Engineered robust offline-first architecture with conflict-free synchronization for reliable field operations.",
+      description: "Healthcare application empowering 5,000+ medical professionals with real-time patient data management. Engineered robust offline-first architecture with conflict-free synchronization for reliable field operations in remote areas.",
       technologies: ["React Native", "IndexedDB", "Service Workers", "Real-time Sync", "PWA"],
       highlights: [
         "Trusted by 5,000+ medical professionals in remote areas",
@@ -116,10 +117,25 @@ export const resumeData = {
     },
   ],
 
+  achievements: [
+    {
+      label: "First LLM deployment in organization",
+      description: "Pioneered GPT-4 integration in production enterprise tools — first engineer to do so company-wide."
+    },
+    {
+      label: "95+ Lighthouse across all metrics",
+      description: "Performance, Accessibility, Best Practices, and SEO — all green — on a 2M+ user government portal."
+    },
+    {
+      label: "DHIS2 — WHO-endorsed platform",
+      description: "Code contributor to a system trusted by the World Health Organization, running in 70+ countries."
+    },
+  ],
+
   social: {
-    github: "https://github.com",
+    github: "https://github.com/vicky-rohilla",
     linkedin: "https://linkedin.com/in/vicky-rohilla",
-    twitter: "https://twitter.com",
+    twitter: "https://twitter.com/vickyrohilla",
     email: "rohillavicky.172@gmail.com",
   },
 
@@ -127,17 +143,17 @@ export const resumeData = {
     {
       name: "Global Impact",
       role: "Healthcare Technology",
-      text: "Contributed to DHIS2 platform serving 70+ countries. Directly impacting healthcare systems worldwide and supporting critical healthcare decision-making for international health systems.",
+      text: "Contributed to DHIS2 platform serving 70+ countries. Directly impacting healthcare systems worldwide and supporting critical healthcare decision-making for international health organizations including the WHO.",
     },
     {
       name: "Innovation Leadership",
-      role: "AI Integration",
-      text: "Pioneered breakthrough LLM integration in enterprise development tools, creating AI-assisted features that boosted team productivity by 40%. First engineer in the organization to successfully deploy GPT-4 in production, transforming how developers interact with complex platforms and setting new standards for AI-augmented workflows.",
+      role: "AI & LLM Integration",
+      text: "Pioneered breakthrough LLM integration in enterprise development tools, creating AI-assisted features that boosted team productivity by 40%. First engineer in the organization to successfully deploy GPT-4 in production — setting new standards for AI-augmented workflows.",
     },
     {
       name: "Scale & Performance",
       role: "Enterprise Solutions",
-      text: "Built high-performance government portal serving millions of daily users with exceptional optimization. Demonstrated strong ability to deliver scalable solutions for mission-critical infrastructure.",
+      text: "Built a high-performance government portal serving 2M+ daily users with 95+ Lighthouse scores across all metrics. Demonstrated a consistent ability to deliver scalable, reliable solutions for mission-critical national infrastructure.",
     },
   ],
 };
